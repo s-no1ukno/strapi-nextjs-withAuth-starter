@@ -9,9 +9,10 @@ Don't start auth from scratch! This template provides custom local authenticatio
 
 ## How To Get It Up And Running
 
-- First, pull the project into your working directory:
+- First, fork this repo to your own github
+- Then pull the project into your working directory:
 ```shell
-git clone https://github.com/s-no1ukno/strapi-nextjs-withAuth-starter.git my-project
+git clone https://github.com/<your-username>/strapi-nextjs-withAuth-starter.git my-project
 cd my-project
 ```
 - Strapi only requires Nodejs(12.x) and npm(6.x), so you'll need to ensure you have these versions updated on your machine
