@@ -1,6 +1,7 @@
 # React, Strapi, Auth with Express Server (Starter Template)
 
 Don't start auth from scratch! This template provides custom local authentication for your Strapi and React project!
+This was implemented following instruction from Alex V. ([Alex the Entreprenerd](https://www.youtube.com/channel/UCMguCMq25nEqlHlr17iINNw)) in his Udemy course on Strapi!
 
 ## Auth with JWT's
 - Local authorization to allow users a quick, secure interface with your application
