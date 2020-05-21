@@ -69,5 +69,5 @@ window.onload = function() {
     - frontend simply pings backend with data
     - backend makes the 'real' request with bearer token read from `httpOnly` cookie
 
-(Also other ways through Ben Awad's method of having an `accessToken` stored in memory and a `refreshToken` stored in a cookie)
+(Also other ways through Ben Awad's method of having an `accessToken` stored in memory and a `refreshToken` stored in a cookie??)
 

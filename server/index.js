@@ -11,36 +11,16 @@ const port = 5000
 const API_URL = process.env.API_URL || 'http://localhost:1337'
 
 // Middlewares
-app.use(express.static(path.join(__dirname, 'frontend/build')))
+app.use(express.static(path.join(__dirname, 'frontend/build'))) // change path to build folder if different
 app.use(express.json())
 app.use(cookieParser())
 app.use(session({ name: 'jwt', keys: ['abc'] }))
 
-/**  Routes Section **/
+/**  ROUTES SECTION **/
 
-app.put('/users/:userId', async (req, res) => {
-  console.log('session token', req.session.jwt)
-  const jwtToken = req.session.jwt
-  const data = req.body
-  const { userId } = req.params
+/** GET Routes */
 
-  console.log("PUT /users/:userId")
-  console.log("jwtToken", jwtToken)
-  console.log('data', data)
-  console.log('userId', userId)
-   
-  const updateUserRes = await axios({
-    method: 'PUT',
-    url: `${API_URL}/users/${userId}`,
-    data,
-    headers: {
-      Authorization: `Bearer ${jwtToken}`
-    }
-  })
-
-  res.send(updateUserRes.data)
-})
-
+// Persisting user in session
 app.get('/users/me', async (req, res) => {
   const { jwt } = req.session
 
@@ -56,15 +36,43 @@ app.get('/users/me', async (req, res) => {
   } catch (error) {
     console.error(error)
   }
-  
 })
 
+// Logout route
 app.get('/users/logout', (req, res) => {
   req.session.jwt = null
   res.send({ status: 200 })
 })
 
+/** POST Routes */
 
+
+
+/** PUT Routes */
+
+// Update User
+app.put('/users/:userId', async (req, res) => {
+  const jwtToken = req.session.jwt
+  const data = req.body
+  const { userId } = req.params
+   
+  const updateUserRes = await axios({
+    method: 'PUT',
+    url: `${API_URL}/users/${userId}`,
+    data,
+    headers: {
+      Authorization: `Bearer ${jwtToken}`
+    }
+  })
+
+  res.send(updateUserRes.data)
+})
+
+/** DELETE Routes */
+
+
+
+/** AUTH Routes */
 
 // authentication - /api/auth/local
 app.post('/api/auth/local', async (req, res) => {
@@ -82,7 +90,6 @@ app.post('/api/auth/local', async (req, res) => {
 })
 
 // registration - /api/auth/local/register
-
 app.post('/api/auth/local/register', async (req, res) => {
   const newUserRes = await axios({
     method: 'POST',
@@ -97,6 +104,7 @@ app.post('/api/auth/local/register', async (req, res) => {
   res.send(data)
 })
 
+// last route, catch all
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname + '/frontend/build/index.html'))
 })

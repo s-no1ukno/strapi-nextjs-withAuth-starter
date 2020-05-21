@@ -2,7 +2,7 @@ import React from 'react'
 import './App.css'
 import axios from 'axios'
 
-import Register from './components/RegisterOrLogin'
+import RegisterOrLogin from './components/RegisterOrLogin'
 import ProfilePage from './components/ProfilePage'
 
 class App extends React.Component {
@@ -11,21 +11,17 @@ class App extends React.Component {
   }
 
   async componentDidMount() {
-    // if (localStorage.getItem('user')) {
-    //   const user = JSON.parse(localStorage.getItem('user')) // UNSAFE: DEV METHOD
-    //   this.setState({ user })
-    // }
     const user = await axios({
       method: 'GET',
       url: '/users/me',
     })
+
     if (user.data) {
       this.setState({ user: { user: user.data }})
     }
   }
 
   logout = async () => {
-    // localStorage.removeItem('user')
     await axios({
       method: 'GET',
       url:'/users/logout'
@@ -41,7 +37,7 @@ class App extends React.Component {
         App
         {
           !user &&
-          <Register updateUser={user => this.setState({ user })} />
+          <RegisterOrLogin updateUser={user => this.setState({ user })} />
         }
 
         {

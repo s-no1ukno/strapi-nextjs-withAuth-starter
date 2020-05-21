@@ -34,8 +34,6 @@ class ProfilePage extends React.Component {
 
     const userId = this.props.user.user.id
 
-    console.log(userId)
-
     const updateUserRes = await Axios({
       method: 'PUT',
       url: `/users/${userId}`,

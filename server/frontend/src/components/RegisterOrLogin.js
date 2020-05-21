@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import { handleChange } from '../utils/inputs'
 
-class Register extends React.Component {
+class RegisterOrLogin extends React.Component {
   constructor(props) {
     super(props)
 
@@ -45,7 +45,7 @@ class Register extends React.Component {
     })
 
     if (this.props.updateUser && typeof this.props.updateUser === 'function') {
-      localStorage.setItem('user', JSON.stringify(userCreationRes.data)) // DEV METHOD - NOT SAFE!!!
+      localStorage.setItem('user', JSON.stringify(userCreationRes.data))
       this.props.updateUser(userCreationRes.data)
     }
   }
@@ -83,4 +83,4 @@ class Register extends React.Component {
   }
 }
 
-export default Register
+export default RegisterOrLogin
